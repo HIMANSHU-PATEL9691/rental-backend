@@ -13,29 +13,9 @@ let dbReady = false;
 let dbError = null;
 
 // Middleware
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  'http://localhost:4173',
-  'http://127.0.0.1:4173',
-  'http://localhost:8080',
-  'http://127.0.0.1:8080',
-  'https://arihantcollection.tech',
-  'http://187.127.150.120',
-  'http://187.127.150.120:5173',
-];
-
 app.use(cors({
-  origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-      return;
-    }
-
-    console.warn(`[cors] Blocked request from origin: ${origin}`);
-    callback(null, false);
-  },
-  credentials: true
+  origin: true,
+  credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
