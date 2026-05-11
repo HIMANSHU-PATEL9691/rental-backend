@@ -20,6 +20,9 @@ const allowedOrigins = [
   'http://127.0.0.1:4173',
   'http://localhost:8080',
   'http://127.0.0.1:8080',
+  'https://arihantcollection.tech',
+  'http://187.127.150.120',
+  'http://187.127.150.120:5173',
 ];
 
 app.use(cors({
