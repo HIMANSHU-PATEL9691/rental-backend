@@ -12,6 +12,7 @@ const rentalSchema = new mongoose.Schema({
   billNo: { type: String, default: '' },
   address: { type: String, default: '' },
   deliveryDate: { type: Date, default: null },
+  rate: { type: Number, default: 0, min: 0 },
   discount: { type: Number, default: 0, min: 0 },
   penalty: { type: Number, default: 0, min: 0 },
   remark: { type: String, default: '' },
