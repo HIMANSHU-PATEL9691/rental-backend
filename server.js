@@ -17,6 +17,11 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// Home Route
+app.get("/", (req, res) => {
+  res.send("Rental Backend Running Successfully");
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({
@@ -27,7 +32,7 @@ app.get('/health', (req, res) => {
   });
 });
 
-
+// API middleware
 app.use('/api', (req, res, next) => {
   console.log(`[api] ${req.method} ${req.originalUrl}`);
 
@@ -43,22 +48,19 @@ app.use('/api', (req, res, next) => {
 
 // Routes
 const authController = require('./controllers/authController');
-// Staff management endpoints used by the Staff Report page
+
+// Staff management endpoints
 app.get('/api/auth/users', authController.getUsers);
 app.put('/api/auth/users/:identifier/status', authController.updateUserStatus);
 app.delete('/api/auth/users/:identifier', authController.deleteUser);
 
-// Auth routes (signup/login)
+// Auth routes
 app.use('/api/auth', require('./routes/auth'));
-
 
 app.use('/api/items', require('./routes/items'));
 app.use('/api/customers', require('./routes/customers'));
 app.use('/api/rentals', require('./routes/rentals'));
 app.use('/api/bills', require('./routes/bills'));
-
-
-
 
 // 404
 app.use('*', (req, res) => {
@@ -71,7 +73,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-app.listen(PORT, () => {
+// Start server
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Backend running on http://localhost:${PORT}`);
   console.log(`API health: http://localhost:${PORT}/health`);
 });
